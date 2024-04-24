@@ -1,4 +1,6 @@
 import { Component } from "react";
+// import PropTypes from "prop-types";
+
 import Spinner from "../spinner/Spinner";
 import ErrorMessage from "../errorMessage/ErrorMessage";
 import Skeleton from "../skeleton/Skeleton";
@@ -16,10 +18,15 @@ class CharInfo extends Component {
   componentDidMount() {
     this.updateChar();
   }
+
   componentDidUpdate(prevProps, prevState) {
     if (this.props.charId !== prevProps.charId) {
       this.updateChar();
     }
+  }
+  componentDidCatch(err, info) {
+    console.log(err, info);
+    this.setState({ error: true });
   }
 
   updateChar = () => {
@@ -32,6 +39,7 @@ class CharInfo extends Component {
       .getCharacter(charId)
       .then(this.onCharLoaded)
       .catch(this.onError);
+    // this.foo.bar = 0;
   };
 
   onCharLoaded = (char) => {
@@ -77,7 +85,7 @@ const View = ({ char }) => {
   return (
     <>
       <div className="char__basics">
-        <img src={thumbnail} alt={name} style={imgStyle}/>
+        <img src={thumbnail} alt={name} style={imgStyle} />
         <div>
           <div className="char__info-name">{name}</div>
           <div className="char__btns">
@@ -107,5 +115,9 @@ const View = ({ char }) => {
     </>
   );
 };
+
+// CharInfo.propTypes = {
+//   charId: PropTypes.number,
+// };
 
 export default CharInfo;
