@@ -1,9 +1,8 @@
 import img from "./error.gif";
+
 const ErrorMessage = () => {
   return (
     <img
-      src={img}
-      alt="error"
       style={{
         display: "block",
         width: "250px",
@@ -11,7 +10,10 @@ const ErrorMessage = () => {
         objectFit: "contain",
         margin: "0 auto",
       }}
+      src={img}
+      alt="Error"
     />
   );
 };
+
 export default ErrorMessage;
